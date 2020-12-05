@@ -24,11 +24,11 @@ fn main() -> io::Result<()> {
     if let Some(path) = opts.formula_file {
         let f = File::open(path)?;
         let reader = BufReader::new(f);
-        run(reader, opts.verbose);
+        run(reader, opts.verbose)?;
     } else {
         let stdin = stdin();
         let reader = stdin.lock();
-        run(reader, opts.verbose);
+        run(reader, opts.verbose)?;
     }
 
     Ok(())
