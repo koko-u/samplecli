@@ -3,6 +3,7 @@ name = "samplecli"
 version = "0.1.0"
 authors = ["KOZAKI Tsuneaki <kozaki.tsuneaki@gmail.com>"]
 edition = "2018"
+default-run = "samplecli"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

@@ -1,7 +1,7 @@
 use clap::Clap;
 use std::fs::File;
 use std::io::{BufReader, BufRead, stdin};
-use std::io;
+use anyhow::Result;
 use samplecli::rpn::RpnCalculator;
 
 #[derive(Clap, Debug)]
@@ -18,7 +18,7 @@ struct Opts {
     formula_file: Option<String>,
 }
 
-fn main() -> io::Result<()> {
+fn main() -> Result<()> {
 
     let opts: Opts = Opts::parse();
     if let Some(path) = opts.formula_file {
@@ -34,12 +34,12 @@ fn main() -> io::Result<()> {
     Ok(())
 }
 
-fn run<R: BufRead>(reader: R, verbose: bool) -> io::Result<()> {
+fn run<R: BufRead>(reader: R, verbose: bool) -> Result<()> {
     let calculator = RpnCalculator::new(verbose);
 
     for line in reader.lines() {
         let line = line?;
-        let answer = calculator.eval(&line);
+        let answer = calculator.eval(&line)?;
         println!("{}", answer);
     }
 
