@@ -3,6 +3,7 @@ use std::fs::File;
 use std::io::{BufReader, BufRead, stdin};
 use anyhow::Result;
 use samplecli::rpn::RpnCalculator;
+use std::path::PathBuf;
 
 #[derive(Clap, Debug)]
 #[clap(
@@ -15,7 +16,7 @@ struct Opts {
     #[clap(short, long)]
     verbose: bool,
     #[clap(name ="FILE")]
-    formula_file: Option<String>,
+    formula_file: Option<PathBuf>,
 }
 
 fn main() -> Result<()> {
