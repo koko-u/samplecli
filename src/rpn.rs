@@ -28,7 +28,7 @@ impl RpnCalculator {
                 }
             }
 
-            if (self.0) {
+            if self.0 {
                 // verbose
                 println!("current token: {}, stack: {:?}", token, stack);
             }
@@ -61,5 +61,27 @@ impl RpnCalculator {
         if let (Some(rhs), Some(lhs)) = (stack.pop(), stack.pop()) {
             stack.push(lhs % rhs);
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn simple_value_evaluation() {
+        let calculator = RpnCalculator::new(false);
+        assert_eq!(20, calculator.eval("20"));
+        assert_eq!(-40, calculator.eval("-40"));
+    }
+
+    #[test]
+    fn single_operation() {
+        let calculator = RpnCalculator::new(false);
+        assert_eq!(20, calculator.eval("5 15 +"));
+        assert_eq!(40, calculator.eval("62 22 -"));
+        assert_eq!(60, calculator.eval("10 6 *"));
+        assert_eq!(80, calculator.eval("240 3 /"));
+        assert_eq!(3, calculator.eval("18 5 %"));
     }
 }
